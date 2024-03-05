@@ -6,7 +6,7 @@ OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
 TARGET = world.out
 
 $(TARGET): $(OBJS)
-	cc -o $(TARGET) $(OBJS)
+	$(CC) -o $(TARGET) $(OBJS)
 
 clean:
 	rm -f *.o $(TARGET)
