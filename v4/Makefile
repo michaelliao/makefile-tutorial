@@ -6,7 +6,10 @@ OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
 TARGET = world.out
 
 $(TARGET): $(OBJS)
-	$(CC) -o $(TARGET) $(OBJS)
+	@echo '$$@ = $@' # 变量 $@ 表示target
+	@echo '$$< = $<' # 变量 @< 表示第一个依赖项
+	@echo '$$^ = $^' # 变量 @^ 表示所有依赖项
+	$(CC) -o $@ $^
 
 clean:
 	rm -f *.o $(TARGET)
