@@ -19,7 +19,7 @@ all: $(TARGET)
 $(BUILD_DIR)/%.d: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@); \
 	rm -f $@; \
-	cc -MM $< >$@.tmp; \
+	$(CC) -MM $< >$@.tmp; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.tmp > $@; \
 	rm -f $@.tmp
 

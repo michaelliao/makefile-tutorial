@@ -11,12 +11,12 @@ TARGET = world.out
 
 # 默认目标:
 $(TARGET): $(OBJS)
-	cc -o $@ $^
+	$(CC) -o $@ $^
 
 # xyz.d 的规则由 xyz.c 生成:
 %.d: %.c
 	rm -f $@; \
-	cc -MM $< >$@.tmp; \
+	$(CC) -MM $< >$@.tmp; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.tmp > $@; \
 	rm -f $@.tmp
 
