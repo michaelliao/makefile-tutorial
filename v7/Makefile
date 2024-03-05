@@ -16,19 +16,19 @@ all: $(TARGET)
 # build/xyz.d 的规则由 src/xyz.c 生成:
 $(BUILD_DIR)/%.d: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@); \
-	rm -f $(@); \
-	cc -MM $(<) >$(@).tmp; \
-	sed 's,\($(*)\)\.o[ :]*,\1.o $(@) : ,g' < $(@).tmp > $(@); \
-	rm -f $(@).tmp
+	rm -f $@; \
+	cc -MM $< >$@.tmp; \
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.tmp > $@; \
+	rm -f $@.tmp
 
 # build/xyz.o 的规则由 src/xyz.c 生成:
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $(<) -o $(@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 # 链接:
 $(TARGET): $(OBJS)
-	@echo "buiding $(@)..."
+	@echo "buiding $@..."
 	@mkdir -p $(dir $@)
 	$(CC) -o $(TARGET) $(OBJS)
 
