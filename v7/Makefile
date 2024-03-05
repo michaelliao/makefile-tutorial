@@ -1,6 +1,8 @@
 SRC_DIR = ./src
 BUILD_DIR = ./build
 TARGET = $(BUILD_DIR)/world.out
+
+CC = cc
 CFLAGS = -Wall
 
 # ./src/*.c
@@ -32,7 +34,7 @@ $(TARGET): $(OBJS)
 	@mkdir -p $(dir $@)
 	$(CC) -o $(TARGET) $(OBJS)
 
-# 清理build目录:
+# 清理 build 目录:
 clean:
 	@echo "clean..."
 	rm -rf $(BUILD_DIR)
