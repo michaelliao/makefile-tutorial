@@ -1,20 +1,12 @@
 # 变量 Variables
 
-# 手动定义的 hello.o main.o
-# OBJS = hello.o main.o
-# 变成根据当前列出的*.c自动替换为*.o
+# $(wildcard *.c) 列出当前目录下的所有 .c 文件: hello.c main.c
+# 用函数 patsubst 进行模式替换得到: hello.o main.o
 OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
 TARGET = world.out
 
 $(TARGET): $(OBJS)
-	$(info OBJS = $(OBJS))
 	cc -o $(TARGET) $(OBJS)
-
-hello.o: hello.c
-	cc -c hello.c
-
-main.o: main.c hello.h
-	cc -c main.c
 
 clean:
 	rm -f *.o $(TARGET)
